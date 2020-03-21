@@ -1,0 +1,17 @@
+[
+  {
+    "group": "user",
+    "permissions": [
+      {
+        "resource": "users/*",
+        "methods": ["POST", "GET", "PUT"],
+        "action": "allow"
+      },
+      {
+        "resource": "admin/*",
+        "methods": ["POST", "GET", "PUT"],
+        "action": "deny"
+      }
+    ]
+  }
+]
