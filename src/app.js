@@ -1,4 +1,6 @@
 const express = require("express");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
 
 const routes = require("./routes");
 
@@ -10,7 +12,9 @@ class App {
   }
 
   middlewares() {
-    this.server.use(express.json());
+    this.server.use(bodyParser.urlencoded({ extended: false }));
+    this.server.use(bodyParser.json());
+    this.server.use(morgan("dev"));
   }
 
   routes() {
