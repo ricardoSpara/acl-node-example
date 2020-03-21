@@ -1,17 +1,24 @@
 const jwt = require("jsonwebtoken");
+const { promisify } = require("util");
+
 const authConfig = require("../../config/auth");
 
-const user = {
-  id: Math.random()
-    .toString(36)
-    .substr(2, 12),
-  email: "ricardo.jrsparapan@gmail.com",
-  password: "1234",
-  role: "user"
-};
+module.exports = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-module.exports = (req, res, next) => {
-  const token = jwt.sign(user, authConfig.secret);
-  req.headers["X-Access-Token"] = token;
-  return next();
+  if (!authHeader) {
+    return res.status(401).json({ error: "Token not provided" });
+  }
+
+  const [, token] = authHeader.split(" ");
+
+  try {
+    const decoded = await promisify(jwt.verify)(token, authConfig.secret);
+
+    req.userId = decoded.id;
+
+    return next();
+  } catch (err) {
+    return res.status(401).json({ error: "Token invalid" });
+  }
 };
