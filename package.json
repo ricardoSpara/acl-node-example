@@ -1,0 +1,14 @@
+{
+  "name": "acl-node-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ricardoSpara/acl-node-example.git",
+  "author": "Ricardo Sparapan <ricardo.ofice@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-acl": "^2.0.8",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
